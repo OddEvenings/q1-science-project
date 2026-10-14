@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Forces Board Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lexend:wght@400;500;600&display=swap">
+<style>
+[hidden]{display:none!important}
+/* Layout: a real standing tri-fold — colored backboard, white paper cards and taped photo frames glued on. Static, nothing to click. */
+:root{
+  --table:#e4e7ec; --board:#0f6b5c; --board-dark:#0b5246; --paper:#ffffff; --ink:#1f2533; --muted:#596277; --line:#dbe1ea;
+  --intro:#2a72d8; --body:#23824f; --concl:#d0641c; --extra:#6b5bb5; --tape:rgba(250,232,160,.85); --sketch:#7a8496;
+  --a1:#2a72d8; --a2:#de4f26; --a3:#e9a800; --accent:#0f6b5c;
+  --font-display:"Fredoka","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Lexend","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --table:#0f141c; --board:#0f5a4e; --board-dark:#0a4239; --paper:#1a2130; --ink:#e8edf5; --muted:#9ea9bc; --line:#2d3748;
+  --intro:#6aa6ff; --body:#5fd394; --concl:#ff9a5c; --extra:#b3a6f0; --tape:rgba(180,160,90,.55); --sketch:#8d97aa;
+  --a1:#6aa6ff; --a2:#ff7a52; --a3:#ffcc3d; --accent:#6fd6c2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --table:#0f141c; --board:#0f5a4e; --board-dark:#0a4239; --paper:#1a2130; --ink:#e8edf5; --muted:#9ea9bc; --line:#2d3748;
+  --intro:#6aa6ff; --body:#5fd394; --concl:#ff9a5c; --extra:#b3a6f0; --tape:rgba(180,160,90,.55); --sketch:#8d97aa;
+  --a1:#6aa6ff; --a2:#ff7a52; --a3:#ffcc3d; --accent:#6fd6c2; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--table);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:28px 48px}
+h1,h2{font-family:var(--font-display);line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+
+.trifold{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) minmax(0,1fr);perspective:2400px}
+.wing,.mid{background:var(--board);padding:18px 16px;display:flex;flex-direction:column;gap:18px;min-width:0;
+  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 2px,transparent 2px 9px)}
+.wing.left{border-radius:8px 0 0 8px;transform-origin:right center;transform:rotateY(8deg);box-shadow:inset -14px 0 18px -12px rgba(0,0,0,.45)}
+.wing.right{border-radius:0 8px 8px 0;transform-origin:left center;transform:rotateY(-8deg);box-shadow:inset 14px 0 18px -12px rgba(0,0,0,.45)}
+.mid{box-shadow:0 18px 30px -12px rgba(0,0,0,.35);border-left:2px solid var(--board-dark);border-right:2px solid var(--board-dark)}
+.shadow{height:18px;margin-inline:4%;background:radial-gradient(ellipse at center,rgba(0,0,0,.28),transparent 70%)}
+@media (max-width:960px){
+  .trifold{grid-template-columns:minmax(0,1fr);gap:12px;perspective:none}
+  .wing.left,.wing.right{transform:none;border-radius:10px;box-shadow:none}
+  .mid{order:-1;border-radius:10px;border:0}
+}
+
+.card{background:var(--paper);border-radius:4px;padding:14px 16px;display:grid;gap:8px;box-shadow:0 3px 0 rgba(0,0,0,.2);border-top:7px solid var(--tc)}
+.card.intro{--tc:var(--intro)} .card.body{--tc:var(--body)} .card.concl{--tc:var(--concl)} .card.extra{--tc:var(--extra)}
+.num{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--tc);letter-spacing:.05em;text-transform:uppercase}
+.card h2{font-size:22px;font-weight:600}
+.card p b{color:var(--ink)}
+.how{font-size:14.5px;color:var(--muted)}
+.from{font-size:14px;font-weight:600;color:var(--tc);border-top:1px dashed var(--line);padding-top:7px}
+
+.titlecard{background:var(--paper);border-radius:4px;padding:16px;text-align:center;display:grid;gap:6px;box-shadow:0 3px 0 rgba(0,0,0,.2);border-top:7px solid var(--accent)}
+.titlecard .num{color:var(--accent)}
+.titlecard h1{font-size:clamp(30px,3.6vw,40px);color:var(--accent)}
+.titlecard .subt{font-family:var(--font-display);font-size:20px;color:var(--muted)}
+.titlecard .how{max-width:46ch;justify-self:center}
+
+.photo{position:relative;background:var(--paper);padding:10px 10px 8px;box-shadow:0 3px 6px rgba(0,0,0,.25);display:grid;gap:6px;justify-self:center;width:min(100%,var(--w,260px))}
+.photo.tl{transform:rotate(-2.2deg)} .photo.tr{transform:rotate(1.8deg)}
+.photo::before{content:"";position:absolute;top:-10px;left:50%;width:70px;height:20px;margin-left:-35px;background:var(--tape);transform:rotate(-3deg)}
+.frame{border:2px dashed var(--sketch);border-radius:3px;display:grid;place-items:center;padding:8px}
+.frame svg{width:100%;height:auto;display:block}
+.frame svg text{font-family:var(--font-body);fill:var(--muted)}
+.cap{font-size:13.5px;color:var(--muted);text-align:center}
+.cap b{color:var(--ink)}
+.row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;align-items:center}
+@media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}}
+
+.key{display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:14px;color:var(--muted)}
+.key span{display:inline-flex;align-items:center;gap:6px}
+.key i{width:14px;height:14px;border-radius:3px;display:inline-block}
+</style>
+<style>body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+<div class="wrap">
+<div class="trifold">
+  <section class="wing left" aria-label="Left panel"><div class="card intro"><span class="num">2 · Introduction</span><h2>Introduction</h2><p>What a force is, and the question your project answers.</p><p class="how"><b>How:</b> Write 2 or 3 short sentences.</p><p class="from">From your writing: shorten your <b>Introduction</b> paragraph.</p></div><figure class="photo tr" style="--w:230px;margin:0"><div class="frame"><svg viewBox="0 0 220 110" aria-hidden="true">
+<line x1="10" y1="88" x2="210" y2="88" style="stroke:var(--sketch)" stroke-width="2"/>
+<rect x="82" y="38" width="56" height="50" rx="4" fill="none" style="stroke:var(--sketch)" stroke-width="3"/>
+<path d="M23 63 H72" style="stroke:var(--a1)" stroke-width="7"/><path d="M68 51 L82 63 L68 75 Z" style="fill:var(--a1)"/>
+<path d="M197 63 H148" style="stroke:var(--a2)" stroke-width="7"/><path d="M152 51 L138 63 L152 75 Z" style="fill:var(--a2)"/>
+<text x="110" y="106" text-anchor="middle" font-size="12">same size arrows</text></svg></div><figcaption class="cap"><b>Picture idea:</b> your object with two equal arrows</figcaption></figure><div class="card body"><span class="num">3 · Body 1</span><h2>Balanced Forces</h2><p>What happens when the forces are the <b>same size</b>.</p><p class="how"><b>How:</b> Write 2 short sentences. Give one real-life example.</p><p class="from">From your writing: shorten <b>Body paragraph 1</b>.</p></div></section>
+  <section class="mid" aria-label="Center panel"><div class="titlecard"><span class="num">1 · Title and subtitle</span><h1>Your Title Here</h1><p class="subt">Subtitle: Balanced and Unbalanced Forces</p><p class="how"><b>How:</b> Put the biggest letters on the board at the top. Add your names under it.</p></div><figure class="photo tl" style="--w:520px;margin:0"><div class="frame"><svg viewBox="0 0 440 170" aria-hidden="true">
+<line x1="10" y1="120" x2="430" y2="120" style="stroke:var(--sketch)" stroke-width="2"/>
+<rect x="80" y="65" width="60" height="55" rx="4" fill="none" style="stroke:var(--sketch)" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M22 92 H72" style="stroke:var(--a1)" stroke-width="8"/><path d="M68 80 L82 92 L68 104 Z" style="fill:var(--a1)"/>
+<path d="M198 92 H148" style="stroke:var(--a2)" stroke-width="8"/><path d="M152 80 L138 92 L152 104 Z" style="fill:var(--a2)"/>
+<text x="46" y="78" text-anchor="middle" font-size="14">3</text><text x="174" y="78" text-anchor="middle" font-size="14">3</text>
+<text x="110" y="145" text-anchor="middle" font-size="14">balanced: stays still</text>
+<rect x="300" y="65" width="60" height="55" rx="4" fill="none" style="stroke:var(--sketch)" stroke-width="3" stroke-dasharray="7 5"/>
+<path d="M228 92 H292" style="stroke:var(--a1)" stroke-width="11"/><path d="M288 78 L302 92 L288 106 Z" style="fill:var(--a1)"/>
+<path d="M392 92 H368" style="stroke:var(--a2)" stroke-width="5"/><path d="M372 84 L360 92 L372 100 Z" style="fill:var(--a2)"/>
+<text x="258" y="76" text-anchor="middle" font-size="14">4</text><text x="382" y="78" text-anchor="middle" font-size="14">1</text>
+<text x="330" y="145" text-anchor="middle" font-size="14">unbalanced: moves →</text>
+<text x="220" y="30" text-anchor="middle" font-size="13">draw your object two times</text>
+</svg></div><figcaption class="cap"><b>6 · Our Model:</b> draw your object with force arrows. A longer arrow means a stronger force. Write the numbers.</figcaption></figure><div class="row"><div class="card extra"><span class="num">7 · Real-Life Examples</span><h2>Real-Life Examples</h2><p>2 or 3 things from everyday life. Label each one balanced or unbalanced.</p><p class="how"><b>How:</b> One short sentence and a small picture for each.</p><p class="from">From your writing: the examples in your <b>Body</b> paragraphs.</p></div><figure class="photo tr" style="--w:220px;margin:0"><div class="frame"><svg viewBox="0 0 220 120" aria-hidden="true">
+<rect x="30" y="70" width="160" height="10" rx="2" fill="none" style="stroke:var(--sketch)" stroke-width="3"/>
+<path d="M50 80 V112 M170 80 V112" style="stroke:var(--sketch)" stroke-width="3"/>
+<rect x="80" y="50" width="60" height="20" rx="2" fill="none" style="stroke:var(--sketch)" stroke-width="3"/>
+</svg></div><figcaption class="cap"><b>Example:</b> a book on a table (balanced)</figcaption></figure></div></section>
+  <section class="wing right" aria-label="Right panel"><div class="card body"><span class="num">4 · Body 2</span><h2>Unbalanced Forces</h2><p>What happens when one force is <b>stronger</b>, and which way the object moves.</p><p class="how"><b>How:</b> Write 2 short sentences. Give one real-life example.</p><p class="from">From your writing: shorten <b>Body paragraph 2</b>.</p></div><figure class="photo tl" style="--w:230px;margin:0"><div class="frame"><svg viewBox="0 0 220 110" aria-hidden="true">
+<line x1="10" y1="88" x2="210" y2="88" style="stroke:var(--sketch)" stroke-width="2"/>
+<rect x="82" y="38" width="56" height="50" rx="4" fill="none" style="stroke:var(--sketch)" stroke-width="3"/>
+<path d="M6 63 H72" style="stroke:var(--a1)" stroke-width="10"/><path d="M68 51 L82 63 L68 75 Z" style="fill:var(--a1)"/>
+<path d="M164 63 H148" style="stroke:var(--a2)" stroke-width="5"/><path d="M152 51 L138 63 L152 75 Z" style="fill:var(--a2)"/>
+<text x="110" y="106" text-anchor="middle" font-size="12">one arrow is longer</text></svg></div><figcaption class="cap"><b>Picture idea:</b> your object with one long arrow and one short arrow</figcaption></figure><div class="card concl"><span class="num">5 · Conclusion</span><h2>Conclusion</h2><p>What you learned about balanced and unbalanced forces.</p><p class="how"><b>How:</b> Write 2 short sentences.</p><p class="from">From your writing: shorten your <b>Conclusion</b> paragraph.</p></div></section>
+</div>
+<div class="shadow" aria-hidden="true"></div>
+<div class="key" aria-label="Color key">
+  <span><i style="background:var(--intro)"></i>Introduction</span>
+  <span><i style="background:var(--body)"></i>Body paragraphs</span>
+  <span><i style="background:var(--concl)"></i>Conclusion</span>
+  <span><i style="background:var(--extra)"></i>Extra section</span>
+</div>
+</div>
+
+</body>
+</html>
